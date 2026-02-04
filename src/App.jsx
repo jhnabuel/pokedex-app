@@ -1,15 +1,14 @@
 import { useState } from 'react'
 import './App.css'
+import PokemonCard from './components/PokemonCard'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <p className="text-3xl underline">
-          Hello world!
-        </p>
+      <div className='App'>
+        <PokemonCard />
       </div>
     </>
   )
