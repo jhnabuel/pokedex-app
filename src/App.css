@@ -5,6 +5,7 @@
 @tailwind utilities;
 @import "tailwindcss";
 
+
 .App {
     text-align: center;
     font-family: 'Bitcount Single', sans-serif;
