@@ -7,6 +7,8 @@ const Button = ({ onClick, text }) => {
     <button className="w-30 h-15 border-4 bg-blue-200 flex items-center justify-center" onClick={onClick}>
       {text}
     </button>
+
+
   )
 }
 
