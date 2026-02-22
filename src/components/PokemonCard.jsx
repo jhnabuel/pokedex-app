@@ -2,6 +2,12 @@ import React from "react";
 import axios from 'axios';
 import _, { shuffle } from 'lodash';
 import { useState } from "react";
+import {
+    POKEAPI_MOVE_URL,
+    POKEAPI_TYPE_URL,
+    POKEAPI_POKEMON_URL,
+    POKEAPI_TYPE_TO_COLOR,
+} from '../global/constants';
 
 const PokemonCard = ({ ButtonComponent }) => {
     const [isLoading, setLoad] = useState(false)
@@ -19,7 +25,7 @@ const PokemonCard = ({ ButtonComponent }) => {
             // Randomizes pokemonID to get random pokemon for the API
             const randomPokemonId = Math.floor(Math.random() * 151) + 1;
 
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemonId}/`)
+            const response = await fetch(`${POKEAPI_POKEMON_URL}/${randomPokemonId}`)
 
             if (!response.ok) {
                 throw new Error('Error loading pokemon.');
@@ -41,7 +47,7 @@ const PokemonCard = ({ ButtonComponent }) => {
             const detailedMoves = await Promise.all(
                 randomMoves.map(async (moveObj) => {
                     const res = await fetch(
-                        `https://pokeapi.co/api/v2/move/${moveObj.move.name}`
+                        `${POKEAPI_MOVE_URL}/${moveObj.move.name}`
                     )
 
                     const moveData = await res.json();
@@ -66,23 +72,43 @@ const PokemonCard = ({ ButtonComponent }) => {
     return (
         <>
             <div className="flex flex-col items-center gap-6">
-                <ButtonComponent onClick={getPokemon} text="Get Pokemon" />
+                <ButtonComponent onClick={getPokemon} text="Generate Pokemon" />
                 {/*Pokemon Card*/}
-                <div className="w-60 h-80 border-4 border-yellow-400 rounded-xl shadow-xl flex flex-col items-center justify-center text-white text-lg font-bold">
+                <div className="w-86  min-h-[500px] border-4 border-yellow-400 bg-white rounded-2xl shadow-2xl flex flex-col 
+                items-center justify-center text-lg transition-transform duration-300 hover:rotate-1 hover:scale-105">
                     {/*Pokemon Name*/}
-                    <div className="border-2">
+                    <div className="text-2xl text-center capitalize">
                         {pokemonName}
                     </div>
 
                     {/*Pokemon Sprite*/}
-                    <img src={pokemonSpriteUrl} alt="" />
-
+                    <div className={`w-70 border-black border-2 rounded-xl m-1 bg-gradient-to-r 
+                            ${POKEAPI_TYPE_TO_COLOR[pokemonTypes[0]?.type?.name] || "from-gray-300"} 
+                            to-white`}>
+                        <img className="mx-auto" src={pokemonSpriteUrl} alt="" />
+                    </div>
 
                     {/*Pokemon Type*/}
-                    <div className="flex flex-row border-2">
+                    <div className="flex flex-wrap justify-center gap-3">
                         {
                             pokemonTypes.map((pokemonTypes, pokemonType) => (
-                                <div key={pokemonType} className="p-1"> {pokemonTypes.type.name}</div>
+                                <div key={pokemonTypes.type.name} className={`px-3 py-1 rounded-full capitalize bg-gradient-to-r
+                                    ${POKEAPI_TYPE_TO_COLOR[pokemonTypes.type.name] || "from-gray-300"} 
+                            to-white`}> {pokemonTypes.type.name}</div>
+                            ))}
+                    </div>
+
+                    {/*Pokemon Moves*/}
+                    <div className="flex flex-col border-2 gap-1 mt-2 p-2">
+                        {
+                            pokemonMoves.map((pokemonMoves, pokemonMove) => (
+                                <div key={pokemonMove} className="flex flex-row">
+                                    <div className="p-3 capitalize"> {pokemonMoves.name}</div>
+                                    <div className={`p-2 border-black border-2 rounded-xl m-1 bg-gradient-to-r 
+                            ${POKEAPI_TYPE_TO_COLOR[pokemonMoves.type] || "from-gray-300"} 
+                            to-white`}> {pokemonMoves.type}</div>
+                                    <div className="p-3"> {pokemonMoves.power ?? "N/A"}</div>
+                                </div>
                             ))}
                     </div>
                 </div>
