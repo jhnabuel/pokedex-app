@@ -74,17 +74,17 @@ const PokemonCard = ({ ButtonComponent }) => {
             <div className="flex flex-col items-center gap-6">
                 <ButtonComponent onClick={getPokemon} text="Generate Pokemon" />
                 {/*Pokemon Card*/}
-                <div className="w-86  min-h-[500px] border-4 border-yellow-400 bg-white rounded-2xl shadow-2xl flex flex-col 
-                items-center justify-center text-lg transition-transform duration-300 hover:rotate-1 hover:scale-105">
+                <div className="w-[350px] min-h-[520px] bg-gradient-to-b from-yellow-300 to-yellow-100 rounded-3xl shadow-xl p-6 flex flex-col items-center gap-4 transition-all duration-300 hover:scale-105">
                     {/*Pokemon Name*/}
                     <div className="text-2xl text-center capitalize">
                         {pokemonName}
                     </div>
 
                     {/*Pokemon Sprite*/}
-                    <div className={`w-70 border-black border-2 rounded-xl m-1 bg-gradient-to-r 
+                    <div className={`w-full rounded-2xl p-4
+                            bg-gradient-to-r
                             ${POKEAPI_TYPE_TO_COLOR[pokemonTypes[0]?.type?.name] || "from-gray-300"} 
-                            to-white`}>
+                            to-white shadow-inner`}>
                         <img className="mx-auto" src={pokemonSpriteUrl} alt="" />
                     </div>
 
@@ -99,10 +99,11 @@ const PokemonCard = ({ ButtonComponent }) => {
                     </div>
 
                     {/*Pokemon Moves*/}
-                    <div className="flex flex-col border-2 gap-1 mt-2 p-2">
+                    <div className="w-full bg-white/70 backdrop-blur-sm rounded-xl p-2 space-y-1 shadow-inner">
                         {
                             pokemonMoves.map((pokemonMoves, pokemonMove) => (
-                                <div key={pokemonMove} className="flex flex-row">
+                                <div key={pokemonMove} className="flex justify-between items-center 
+bg-white rounded-lg px-3 py-2 shadow-sm">
                                     <div className="p-3 capitalize"> {pokemonMoves.name}</div>
                                     <div className={`p-2 border-black border-2 rounded-xl m-1 bg-gradient-to-r 
                             ${POKEAPI_TYPE_TO_COLOR[pokemonMoves.type] || "from-gray-300"} 

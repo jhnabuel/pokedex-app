@@ -4,7 +4,26 @@ import PokemonCard from './components/PokemonCard'
 
 const Button = ({ onClick, text }) => {
   return (
-    <button className="w-35 h-20 p-4 rounded-2xl shadow-2xl border-4 border-black m-2 p-2 bg-blue-200 text-white" onClick={onClick}>
+    <button
+      onClick={onClick}
+      className="
+    w-36 h-16
+    rounded-2xl
+    bg-gradient-to-r from-blue-500 to-blue-400
+    text-white text-lg
+    shadow-lg
+    border-2 border-blue-1000
+    transition-all duration-300 ease-in-out
+    
+    hover:scale-110
+    hover:shadow-2xl
+    hover:from-blue-600
+    hover:to-blue-500
+    
+    active:scale-95
+    active:shadow-md
+  "
+    >
       {text}
     </button>
 
