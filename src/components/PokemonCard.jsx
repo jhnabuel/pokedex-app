@@ -10,7 +10,7 @@ const PokemonCard = ({ ButtonComponent }) => {
     const [pokemonTypes, setPokemonTypes] = useState([])
     const [pokemonMoves, setPokemonMoves] = useState([])
     /**
-     * This function helper gets the 
+     * This function helper gets the Pokemon Data using PokeAPI
      *
      */
     const getPokemon = async () => {
@@ -63,14 +63,12 @@ const PokemonCard = ({ ButtonComponent }) => {
     }
 
 
-
-
     return (
         <>
             <div className="flex flex-col items-center gap-6">
                 <ButtonComponent onClick={getPokemon} text="Get Pokemon" />
                 {/*Pokemon Card*/}
-                <div className="w-60 h-80 border-4 border-yellow-400 rounded-xl bg-red-600 shadow-xl flex flex-col items-center justify-center text-white text-lg font-bold">
+                <div className="w-60 h-80 border-4 border-yellow-400 rounded-xl shadow-xl flex flex-col items-center justify-center text-white text-lg font-bold">
                     {/*Pokemon Name*/}
                     <div className="border-2">
                         {pokemonName}
@@ -81,7 +79,12 @@ const PokemonCard = ({ ButtonComponent }) => {
 
 
                     {/*Pokemon Type*/}
-
+                    <div className="flex flex-row border-2">
+                        {
+                            pokemonTypes.map((pokemonTypes, pokemonType) => (
+                                <div key={pokemonType} className="p-1"> {pokemonTypes.type.name}</div>
+                            ))}
+                    </div>
                 </div>
             </div>
         </>
