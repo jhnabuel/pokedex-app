@@ -76,7 +76,7 @@ const PokemonCard = ({ ButtonComponent }) => {
                 {/*Pokemon Card*/}
                 <div className="w-[350px] min-h-[520px] bg-gradient-to-b from-yellow-300 to-yellow-100 rounded-3xl shadow-xl p-6 flex flex-col items-center gap-4 transition-all duration-300 hover:scale-105">
                     {/*Pokemon Name*/}
-                    <div className="text-2xl text-center capitalize">
+                    <div className="text-4xl text-center text-[#F4F5F9] capitalize">
                         {pokemonName}
                     </div>
 
@@ -92,8 +92,8 @@ const PokemonCard = ({ ButtonComponent }) => {
                     <div className="flex flex-wrap justify-center gap-3">
                         {
                             pokemonTypes.map((pokemonTypes, pokemonType) => (
-                                <div key={pokemonTypes.type.name} className={`px-3 py-1 rounded-full capitalize bg-gradient-to-r
-                                    ${POKEAPI_TYPE_TO_COLOR[pokemonTypes.type.name] || "from-gray-300"} 
+                                <div key={pokemonTypes.type.name} className={`px-4 py-1 text-sm font-semibold text-white rounded-full shadow-md capitalize bg-gradient-to-r
+                                    ${POKEAPI_TYPE_TO_COLOR[pokemonTypes.type.name] || "from-gray-400"} 
                             to-white`}> {pokemonTypes.type.name}</div>
                             ))}
                     </div>
@@ -103,7 +103,7 @@ const PokemonCard = ({ ButtonComponent }) => {
                         {
                             pokemonMoves.map((pokemonMoves, pokemonMove) => (
                                 <div key={pokemonMove} className="flex justify-between items-center 
-bg-white rounded-lg px-3 py-2 shadow-sm">
+                                    bg-white rounded-lg px-3 py-2 shadow-sm">
                                     <div className="p-3 capitalize"> {pokemonMoves.name}</div>
                                     <div className={`p-2 border-black border-2 rounded-xl m-1 bg-gradient-to-r 
                             ${POKEAPI_TYPE_TO_COLOR[pokemonMoves.type] || "from-gray-300"} 
@@ -113,6 +113,7 @@ bg-white rounded-lg px-3 py-2 shadow-sm">
                             ))}
                     </div>
                 </div>
+                <ButtonComponent onClick={getPokemon} text="Save Pokemon Card as JPEG" />
             </div>
         </>
     )

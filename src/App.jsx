@@ -7,7 +7,7 @@ const Button = ({ onClick, text }) => {
     <button
       onClick={onClick}
       className="
-    w-36 h-16
+    w-60 h-16
     rounded-2xl
     bg-gradient-to-r from-blue-500 to-blue-400
     text-white text-lg
